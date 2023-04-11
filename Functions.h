@@ -6,13 +6,13 @@
 #define GRAPHADT_FUNCTIONS_H
 #include <iostream>
 struct element_struct {
-    std::string label;
-    std::string content;
+    std::string listofVertices;
+    std::string endOfVertices;
 };
 struct contents{
-    int level_of_node, order_of_node;
+    int edgeLabel;
     element_struct strings;
 };
-loadTree(const std::string& filename);
+
 
 #endif //GRAPHADT_FUNCTIONS_H

@@ -30,10 +30,9 @@ std::vector<contents> readFromFile(const std::string& filename) {
             if (row.empty()) {
                 continue;
             }
-            new_struct.strings.label = row[2];
-            new_struct.strings.content = row[3];
-            new_struct.order_of_node = std::stoi(row[1]);
-            new_struct.level_of_node = std::stoi(row[0]);
+            new_struct.edgeLabel = std::stoi(row[2]);
+            new_struct.strings.endOfVertices = (row[1]);
+            new_struct.strings.listofVertices = (row[0]);
 
             //adds strut into the vector
             list.push_back(new_struct);
