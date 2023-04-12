@@ -3,10 +3,43 @@
 //
 
 #include "Functions.h"
+#include "GraphADT.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+void findEdgesMenu(GraphADT<std::string> graph){
+    std::string label;
+    std::cout <<"Please provide the label of the of the vertex you are looking for: ";
+    std::cin >> label;
+}
+
+void findPathMenu(GraphADT<std::string> graph){
+    std::string label1, label2;
+    std::cout <<"Please provide the label of the first vertex you are looking for";
+    std::cin >> label1;
+    std::cout <<"Please provide the label of the second vertex you are looking for";
+    std::cin >> label2;
+}
+
+GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
+    std::string label1, label2, newVertex;
+    std::cout <<"Please provide the label of the first vertex you want to add in-between of";
+    std::cin >> label1;
+    std::cout <<"Please provide the label of the second vertex you want to add in-between of";
+    std::cin >> label2;
+    std::cout <<"Please provide the label of the new vertex you want to add";
+    std::cin >> newVertex;
+}
+
+GraphADT<std::string> ereaseVertexMenu(GraphADT<std::string> graph) {
+    std::string vertexToBeRemoved;
+    std::cout <<"Please provide the label of the vertex you want to remove";
+    std::cin >> vertexToBeRemoved;
+}
+
+
 //builds a vector of a based on the file
 std::vector<contents> readFromFile(const std::string& filename) {
     //creates the vector to store the information
