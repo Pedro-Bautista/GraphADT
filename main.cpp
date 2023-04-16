@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include "GraphADT.h"
-#include "functions.h"
+#include "Functions.h"
 
 void consolePrinting() {
     GraphADT<std::string> graph;
@@ -51,8 +51,10 @@ void consolePrinting() {
 }
 
 int main() {
-    std::cout <<"hello??";
-    std::cout<<"WHY??";
-    std::cout <<"ladidadi";
+    GraphADT<std::string> graph;
+    ObjectVertex<std::string> asd = *new ObjectVertex<std::string>;
+    *asd = "firstVertex";
+    graph.insertVertex(asd);
+    graph.printVectors();
     return EXIT_SUCCESS;
 }
