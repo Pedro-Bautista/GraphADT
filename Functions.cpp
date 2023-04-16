@@ -14,6 +14,28 @@ void findEdgesMenu(GraphADT<std::string> graph){
     std::string label;
     std::cout <<"Please provide the label of the of the vertex you are looking for: ";
     std::cin >> label;
+
+    //for loop to search for the vertex using an iterator
+    ObjectVertex<std::string> vertex;
+    std::list<ObjectVertex<std::string>> vertices = graph.vertices();
+    std::list<ObjectVertex<std::string>>::iterator i;
+    for (i = vertices.begin(); i != vertices.end(); ++i) {
+        if (*(*i) == label) {
+            break;
+        }
+    }
+    vertex = (*i);
+
+    //creates list of the incident edges for the vertex
+    std::list<ObjectEdge<std::string>> listOfIncidentEdges; // TO BE COMPLETED = vertex.incidentEdges();
+    std::list<ObjectEdge<std::string>>::iterator j;
+
+    //prints results
+    for (j = listOfIncidentEdges.begin(); j != listOfIncidentEdges.end(); ++j) {
+        std::cout << *vertex << "to " << *((*j).opposite(vertex)) << "is " << *(*j) << std::endl;
+    }
+
+
 }
 
 //Find a path in the graph
