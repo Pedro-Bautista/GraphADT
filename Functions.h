@@ -6,6 +6,7 @@
 #define GRAPHADT_FUNCTIONS_H
 #include <iostream>
 #include "GraphADT.h"
+#include <vector>
 
 struct element_struct {
     std::string listofVertices;
