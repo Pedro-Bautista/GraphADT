@@ -3,10 +3,12 @@
 //
 
 #include <iostream>
+#include <map>
 
 int main() {
-    std::cout <<"hello??";
-    std::cout<<"WHY??";
-    std::cout <<"ladidadi";
+    std::map<std::string,int> products{{"Hammer",14},{"Nails",25},{"Wrench",8}};
+    products.insert("Wrench",18);
+    products.insert("wrench",18);
+    int quantity=products{"drill"};
     return EXIT_SUCCESS;
 }
