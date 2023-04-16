@@ -9,12 +9,14 @@
 #include <fstream>
 #include <sstream>
 
+//Find edges incident on a vertex
 void findEdgesMenu(GraphADT<std::string> graph){
     std::string label;
     std::cout <<"Please provide the label of the of the vertex you are looking for: ";
     std::cin >> label;
 }
 
+//Find a path in the graph
 void findPathMenu(GraphADT<std::string> graph){
     std::string label1, label2;
     std::cout <<"Please provide the label of the first vertex you are looking for";
@@ -23,6 +25,7 @@ void findPathMenu(GraphADT<std::string> graph){
     std::cin >> label2;
 }
 
+//Insert an edge
 GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::string label1, label2, newVertex;
     std::cout <<"Please provide the label of the first vertex you want to add in-between of";
@@ -33,6 +36,7 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::cin >> newVertex;
 }
 
+//Erase a vertex
 GraphADT<std::string> ereaseVertexMenu(GraphADT<std::string> graph) {
     std::string vertexToBeRemoved;
     std::cout <<"Please provide the label of the vertex you want to remove";

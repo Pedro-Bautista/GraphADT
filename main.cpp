@@ -3,16 +3,22 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "GraphADT.h"
 #include "functions.h"
 
 void consolePrinting() {
+    GraphADT<std::string> graph;
+    std::vector<contents> list;
     std::string filename;
+
     std::cout <<"Hello!";
     std::cout <<"Enter the file name: ";
     std::cin >> filename;
-    //create graph object
-    GraphADT<std::string> graph;
+
+    //creates graph
+    list = readFromFile(filename);
+
 
     std::cout <<"Thank you. Your graph is ready";
 
@@ -35,6 +41,9 @@ void consolePrinting() {
                 break;
             case 4:
                 graph = ereaseVertexMenu(graph);
+                break;
+            case 5:
+                return;
         }
     } while (input != 5);
 
