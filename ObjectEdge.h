@@ -26,7 +26,7 @@ public:
 
     //test whether e is incident on v
     bool IsIncidentOn(ObjectVertex<G> V);
-
+    friend class ObjectVertex<G>;
 };
 
 template<typename G>

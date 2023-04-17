@@ -6,7 +6,8 @@
 #define GRAPHADT_OBJECTVERTEX_H
 #include <list>
 #include "ObjectEdge.h"
-
+template<typename G>
+class ObjectEdge;
 
 template<typename G>
 class ObjectVertex{
@@ -27,7 +28,7 @@ public:
     G operator*();
 
     //returns an edge list of edges incident on the vertex
-    //std::list<ObjectEdge<G>> incidentEdges();
+    std::list<ObjectEdge<G>> incidentEdges();
 
     //test whether the vertex and V are adjacent
     bool isAdjacentTo(ObjectVertex<G> V);
