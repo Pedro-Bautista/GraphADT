@@ -9,11 +9,12 @@
 #include <vector>
 
 struct element_struct {
+    std::vector<std::string> TotalVerticies;
     std::string listofVertices;
     std::string endOfVertices;
 };
 struct contents{
-    int edgeLabel;
+    float edgeLabel;
     element_struct strings;
 };
 

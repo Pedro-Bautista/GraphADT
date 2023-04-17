@@ -53,6 +53,7 @@ void consolePrinting() {
 int main() {
     GraphADT<std::string> graph;
     std::string filename = "input.txt";
+    std::vector<contents> list;
     std::vector<contents> asf;
     graph = graphMaker(asf);
     printVectors(graph);

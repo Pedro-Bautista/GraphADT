@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 //prints all vectors
 void printVectors(const GraphADT<std::string>& graph) {
@@ -126,23 +127,40 @@ std::vector<contents> readFromFile(const std::string& filename) {
     std::string Contents;
     std::ifstream infile;
     infile.open(filename);
+    //allows us to skip first line.
+    bool first_time = true;
     if (infile.is_open()) {
         while (std::getline(infile, buffer)) {
-            std::vector<std::string> row;
-            std::stringstream temp(buffer);
-            while (std::getline(temp, Contents, '\t')) {
-                row.push_back(Contents);
-            }
-
             //saves the different strings into a new contents structure
             contents new_struct;
             element_struct new_string_struct;
+            std::vector<std::string> row;
+            std::stringstream temp(buffer);
+
+            if (first_time) {
+                first_time = false;
+                while (std::getline(temp, Contents, ',')) {
+                    new_struct.strings.TotalVerticies.push_back(Contents);
+                    std::cout<<new_struct.strings.TotalVerticies.back()<<std::endl;
+                }
+                continue;
+            }
+            while (std::getline(temp, Contents, '\t')) {
+                row.push_back(Contents);
+            }
             if (row.empty()) {
                 continue;
             }
-            new_struct.edgeLabel = std::stoi(row[2]);
-            new_struct.strings.endOfVertices = (row[1]);
             new_struct.strings.listofVertices = (row[0]);
+            std::cout<<std::endl<<new_struct.strings.listofVertices;
+
+            new_struct.strings.endOfVertices = (row[1]);
+            std::cout<<" "<<new_struct.strings.endOfVertices<<" ";
+
+            new_struct.edgeLabel = std::stof(row[2]);
+            std::cout<<new_struct.edgeLabel;
+
+
 
             //adds strut into the vector
             list.push_back(new_struct);
