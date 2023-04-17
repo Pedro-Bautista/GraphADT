@@ -158,7 +158,7 @@ std::vector<contents> readFromFile(const std::string& filename) {
             new_struct.strings.endOfVertices = (row[1]);
             std::cout<<" "<<new_struct.strings.endOfVertices<<" ";
 
-            new_struct.edgeLabel = std::stof(row[2]);
+            new_struct.edgeLabel = (row[2]);
             std::cout<<new_struct.edgeLabel;
 
 

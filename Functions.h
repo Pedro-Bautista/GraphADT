@@ -14,7 +14,7 @@ struct element_struct {
     std::string endOfVertices;
 };
 struct contents{
-    float edgeLabel;
+    std::string edgeLabel;
     element_struct strings;
 };
 
