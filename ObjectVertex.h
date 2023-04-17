@@ -15,6 +15,14 @@ private:
 
 
 public:
+    //constructor
+    ObjectVertex() = default;
+
+    //constructor
+    explicit ObjectVertex(G label) : label(label) {
+
+    }
+
     //returns the element of the vertex
     G operator*();
 

@@ -16,8 +16,14 @@ struct contents{
     element_struct strings;
 };
 
+//takes std::vector<contents> and creates a graph based on it
+GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList);
+
+//prints vertices
+void printVectors(const GraphADT<std::string>& graph);
+
 //Find edges incident on a vertex
-void findEdgesMenu(GraphADT<std::string> graph);
+void findEdgesMenu(const GraphADT<std::string>& graph);
 
 //Find a path in the graph
 void findPathMenu(GraphADT<std::string> graph);
