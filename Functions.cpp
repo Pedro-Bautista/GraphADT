@@ -172,6 +172,7 @@ std::vector<contents> readFromFile(const std::string& filename) {
     } else {
         std::cout << "Unable to open File! Try again later.\n";
     }
+    std::cout<<std::endl<<std::endl;
     return list;
 }
 
@@ -187,7 +188,7 @@ GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
     GraphADT<std::string> graph;
     //std::list<std::string>::iterator i;
     for ( int i =0; i<contentsList.front().strings.TotalVerticies.size(); i++) {
-        std::cout<<contentsList.front().strings.TotalVerticies[i];
+        //std::cout<<contentsList.front().strings.TotalVerticies[i];
         ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(contentsList.front().strings.TotalVerticies[i]);
         graph.insertVertex(newVertex);
     }
