@@ -143,6 +143,7 @@ std::vector<contents> readFromFile(const std::string& filename) {
                     new_struct.strings.TotalVerticies.push_back(Contents);
                     std::cout<<new_struct.strings.TotalVerticies.back()<<std::endl;
                 }
+                list.push_back(new_struct);
                 continue;
             }
             while (std::getline(temp, Contents, '\t')) {
@@ -171,24 +172,23 @@ std::vector<contents> readFromFile(const std::string& filename) {
     } else {
         std::cout << "Unable to open File! Try again later.\n";
     }
-
-
     return list;
 }
 
 GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
-    std::list<std::string> tempList;
-    tempList.push_back("Starbucks");
-    tempList.push_back("USF");
-    tempList.push_back("Publix");
-    tempList.push_back("Bus Stop");
-    tempList.push_back("Stadium");
+//    std::list<std::string> tempList;
+//    tempList.push_back("Starbucks");
+//    tempList.push_back("USF");
+//    tempList.push_back("Publix");
+//    tempList.push_back("Bus Stop");
+//    tempList.push_back("Stadium");
 
 
     GraphADT<std::string> graph;
-    std::list<std::string>::iterator i;
-    for (i = tempList.begin(); i != tempList.end(); i.operator++()) {
-        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(*i);
+    //std::list<std::string>::iterator i;
+    for ( int i =0; i<contentsList.front().strings.TotalVerticies.size(); i++) {
+        std::cout<<contentsList.front().strings.TotalVerticies[i];
+        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(contentsList.front().strings.TotalVerticies[i]);
         graph.insertVertex(newVertex);
     }
 

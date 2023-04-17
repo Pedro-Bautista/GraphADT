@@ -54,8 +54,9 @@ int main() {
     GraphADT<std::string> graph;
     std::string filename = "input.txt";
     std::vector<contents> list;
+    list= readFromFile(filename);
     std::vector<contents> asf;
-    graph = graphMaker(asf);
+    graph = graphMaker(list);
     printVectors(graph);
     return EXIT_SUCCESS;
 }
