@@ -52,9 +52,9 @@ void consolePrinting() {
 
 int main() {
     GraphADT<std::string> graph;
-    ObjectVertex<std::string> asd = *new ObjectVertex<std::string>;
-    *asd = "firstVertex";
-    graph.insertVertex(asd);
-    graph.printVectors();
+    std::string filename = "input.txt";
+    std::vector<contents> asf;
+    graph = graphMaker(asf);
+    printVectors(graph);
     return EXIT_SUCCESS;
 }
