@@ -9,8 +9,19 @@
 #include <fstream>
 #include <sstream>
 
+//prints all vectors
+void printVectors(const GraphADT<std::string>& graph) {
+    std::list<ObjectVertex<std::string>> verticesList = graph.vertices();
+    std::cout <<"The list of vertices are:\t";
+    for (std::list<ObjectVertex<std::string>>::iterator i = verticesList.begin(); i != verticesList.end(); ++i) {
+        std::cout << **i << "\t\t";
+    }
+    std::cout <<"\n";
+
+}
+
 //Find edges incident on a vertex
-void findEdgesMenu(GraphADT<std::string> graph){
+void findEdgesMenu(const GraphADT<std::string>& graph){
     std::string label;
     std::cout <<"Please provide the label of the of the vertex you are looking for: ";
     std::cin >> label;
@@ -60,10 +71,8 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::cin >> newEdgeString;
     ObjectEdge<std::string> newEdge;
     *newEdge = newEdgeString;
-    ObjectVertex<std::string> label1Vertex;
-    *label1Vertex = label1;
-    ObjectVertex<std::string> label2Vertex;
-    *label1Vertex = label2;
+    ObjectVertex<std::string> label1Vertex = *new ObjectVertex<std::string>(label1);
+    ObjectVertex<std::string> label2Vertex = *new ObjectVertex<std::string>(label2);
 
     //checks if vertices are already in the list
     bool existanceOfVertexAlreadyInGraph;
@@ -93,7 +102,7 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     graph.insertEdge(label1Vertex, label2Vertex, newEdge);
     std::cout <<"Edge inserted successfully (hopefully)" << std::endl;
 
-}
+ }
 
 //Erase a vertex
 GraphADT<std::string> ereaseVertexMenu(GraphADT<std::string> graph) {
@@ -147,4 +156,26 @@ std::vector<contents> readFromFile(const std::string& filename) {
 
 
     return list;
+}
+
+GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
+    std::list<std::string> tempList;
+    tempList.push_back("Starbucks");
+    tempList.push_back("USF");
+    tempList.push_back("Publix");
+    tempList.push_back("Bus Stop");
+    tempList.push_back("Stadium");
+
+
+    GraphADT<std::string> graph;
+    std::list<std::string>::iterator i;
+    for (i = tempList.begin(); i != tempList.end(); i.operator++()) {
+        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(*i);
+        graph.insertVertex(newVertex);
+    }
+
+
+
+
+    return graph;
 }

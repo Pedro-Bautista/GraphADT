@@ -7,32 +7,52 @@
 
 #include <list>
 #include "ObjectEdge.h"
+#include "ObjectVertex.h"
 
 
 template<typename G>
-class GraphADT{
+class GraphADT {
+private:
+    std::list<ObjectVertex<G>> verticesList;
+    std::list<ObjectEdge<G>> edgesList;
+
 public:
     //Return a vertex list of all the vertices of the graph.
-    std::list<ObjectVertex<G>> vertices();
+    std::list<ObjectVertex<G>> vertices() const;
 
     //Return an edge list of all the edges of the graph.
     std::list<ObjectEdge<G>> edges();
 
     //Insert and return a new vertex storing element x.
-    void insertVertex(x);
+    ObjectVertex<G> insertVertex(ObjectVertex<G> vertex);
 
     //Insert and return a new undirected edge with end vertices and storing new edge
-    void insertEdge(ObjectVertex<G>,ObjectVertex<G>,ObjectEdge<G>);
+    void insertEdge(ObjectVertex<G>, ObjectVertex<G>, ObjectEdge<G>);
 
     //Remove vertex and all its incident edges
     void eraseVertex(ObjectVertex<G>);
 
     //Remove edge e
-    void eraseEdge(e);
+    void eraseEdge(ObjectEdge<G>);
+
 
     friend ObjectEdge<G>;
     friend ObjectVertex<G>;
 };
+
+
+template<typename G>
+void GraphADT<G>::eraseEdge(ObjectEdge<G>) {
+
+}
+
+template<typename G>
+ObjectVertex<G> GraphADT<G>::insertVertex(ObjectVertex<G> vertex) {
+    verticesList.push_back(vertex);
+    std::cout << "A vertex has been inserted into the graph, with no edges" << std::endl;
+    return vertex;
+}
+
 
 template<typename G>
 void GraphADT<G>::eraseVertex(ObjectVertex<G>) {
@@ -46,12 +66,12 @@ void GraphADT<G>::insertEdge(ObjectVertex<G>, ObjectVertex<G>, ObjectEdge<G>) {
 
 template<typename G>
 std::list<ObjectEdge<G>> GraphADT<G>::edges() {
-    return std::list<ObjectEdge<G>>();
+    return edgesList;
 }
 
 template<typename G>
-std::list<ObjectVertex<G>> GraphADT<G>::vertices() {
-    return std::list<ObjectVertex<G>>();
+std::list<ObjectVertex<G>> GraphADT<G>::vertices() const {
+    return verticesList;
 }
 
 
