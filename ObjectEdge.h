@@ -47,12 +47,14 @@ std::list<ObjectVertex<G>> ObjectEdge<G>::endVertices() {
 
 template<typename G>
 bool ObjectEdge<G>::IsIncidentOn(ObjectVertex <G> V) {
-    for (auto i = incidentList.begin(); i != incidentList.end(); ++i) {
-        if (*i == V) {
+
+    for (auto x = incidentList.begin(); x != incidentList.end(); ++x) {
+        if (*x == V) {
             return true;
-        } else return false;
+        }
     }
     return false;
+
 }
 
 template<typename G>
