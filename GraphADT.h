@@ -41,6 +41,7 @@ public:
 };
 
 
+
 template<typename G>
 void GraphADT<G>::eraseEdge(ObjectEdge<G>) {
 
@@ -49,7 +50,7 @@ void GraphADT<G>::eraseEdge(ObjectEdge<G>) {
 template<typename G>
 ObjectVertex<G> GraphADT<G>::insertVertex(ObjectVertex<G> vertex) {
     verticesList.push_back(vertex);
-    std::cout << "A vertex has been inserted into the graph, with no edges" << std::endl;
+    std::cout << "A vertex, "<< *vertex <<" , has been inserted into the graph, with no edges" << std::endl;
     return vertex;
 }
 
@@ -60,8 +61,10 @@ void GraphADT<G>::eraseVertex(ObjectVertex<G>) {
 }
 
 template<typename G>
-void GraphADT<G>::insertEdge(ObjectVertex<G>, ObjectVertex<G>, ObjectEdge<G>) {
+void GraphADT<G>::insertEdge(ObjectVertex<G> v1, ObjectVertex<G> v2, ObjectEdge<G> e) {
 
+
+    std::cout <<"A edge, with label " << *e << ", has been inserted between " << *v1 << " and " << *v2 <<".\n";
 }
 
 template<typename G>
@@ -76,3 +79,4 @@ std::list<ObjectVertex<G>> GraphADT<G>::vertices() const {
 
 
 #endif //GRAPHADT_GRAPHADT_H
+
