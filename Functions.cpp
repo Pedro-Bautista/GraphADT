@@ -13,11 +13,11 @@
 //prints all vectors
 void printVectors(const GraphADT<std::string>& graph) {
     std::list<ObjectVertex<std::string>> verticesList = graph.vertices();
-    std::cout <<"The list of vertices are:\t";
+    std::cout <<"The list of vertices are: \t" << std::endl;
     for (std::list<ObjectVertex<std::string>>::iterator i = verticesList.begin(); i != verticesList.end(); ++i) {
-        std::cout << **i << "\t\t";
+        std::cout << "|"<< **i << "|\t\t" << std::endl;
     }
-    std::cout <<"\n";
+    std::cout <<"End of List";
 
 }
 
@@ -176,25 +176,54 @@ std::vector<contents> readFromFile(const std::string& filename) {
     return list;
 }
 
+
+
 GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
-//    std::list<std::string> tempList;
-//    tempList.push_back("Starbucks");
-//    tempList.push_back("USF");
-//    tempList.push_back("Publix");
-//    tempList.push_back("Bus Stop");
-//    tempList.push_back("Stadium");
 
 
     GraphADT<std::string> graph;
-    //std::list<std::string>::iterator i;
     for ( int i =0; i<contentsList.front().strings.TotalVerticies.size(); i++) {
+
+
         //std::cout<<contentsList.front().strings.TotalVerticies[i];
-        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(contentsList.front().strings.TotalVerticies[i]);
+        std::string vertexString = contentsList.front().strings.TotalVerticies[i].substr(0, contentsList.front().strings.TotalVerticies[i].length());
+        //removes first character if first character is a space
+
+
+        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(vertexString);
         graph.insertVertex(newVertex);
     }
-    std::cout<<"size is"<<contentsList.size()<<"\n";
     for (int i=0;i<contentsList.size();i++){
-        std::cout<<contentsList[i].edgeLabel<<std::endl;
+        if (!contentsList[i].edgeLabel.empty()) {
+
+
+            //for some reason, if we don't substring it, the program doesn't work, I believe it is because there is another character at the end of the label string which causes issues for the next line, so a substring is used to remove that last character, and the problem went away
+            std::string firstVertexStringCleaned = contentsList[i].strings.listofVertices.substr(0,contentsList[i].strings.listofVertices.length());
+            std::string secondVertexStringCleaned = contentsList[i].strings.endOfVertices.substr(0,contentsList[i].strings.endOfVertices.length());
+            std::string labelStringCleaned = contentsList[i].edgeLabel.substr(0, contentsList[i].edgeLabel.length() - 1);
+
+            //std::cout << firstVertexStringCleaned << " to " << secondVertexStringCleaned << " is " << labelStringCleaned << std::endl;
+
+            ObjectVertex<std::string> firstVertex;
+            ObjectVertex<std::string> secondVertex;
+
+            std::list<ObjectVertex<std::string>>::iterator j;
+            std::list<ObjectVertex<std::string>> vertices = graph.vertices();
+            for (j = vertices.begin(); j != vertices.end(); ++j) {
+                if (*(*j) == firstVertexStringCleaned) {
+                    firstVertex = *j;
+                }
+                if (*(*j) == secondVertexStringCleaned) {
+                    secondVertex = *j;
+                }
+            }
+
+            std::cout << *firstVertex << " to " << *secondVertex << " is " << labelStringCleaned << std::endl;
+
+
+            //graph.insertEdge(firstVertex,secondVertex, *new ObjectEdge<std::string>(labelStringCleaned));
+
+        }
     }
 
 

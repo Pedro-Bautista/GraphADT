@@ -11,6 +11,10 @@ class ObjectEdge{
 public:
     G value;
 
+    explicit ObjectEdge(G value) : value(value) {}
+
+    ObjectEdge() {}
+
 public:
     //returns the element of the label
     G operator*();
