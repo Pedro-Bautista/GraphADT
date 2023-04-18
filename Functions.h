@@ -18,6 +18,9 @@ struct contents{
     element_struct strings;
 };
 
+//removes white spaces before and after the nonwhitespace characters
+std::string removeWhiteSpaceBeforeAndAfter(std::string input);
+
 //takes std::vector<contents> and creates a graph based on it
 GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList);
 

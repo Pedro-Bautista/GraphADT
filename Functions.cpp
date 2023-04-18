@@ -10,21 +10,23 @@
 #include <sstream>
 #include <algorithm>
 
+const std::string WHITESPACE = " \r";
+
 //prints all vectors
-void printVectors(const GraphADT<std::string>& graph) {
+void printVectors(const GraphADT<std::string> &graph) {
     std::list<ObjectVertex<std::string>> verticesList = graph.vertices();
-    std::cout <<"The list of vertices are: \t" << std::endl;
+    std::cout << "The list of vertices are: \t" << std::endl;
     for (std::list<ObjectVertex<std::string>>::iterator i = verticesList.begin(); i != verticesList.end(); ++i) {
-        std::cout << "|"<< **i << "|\t\t" << std::endl;
+        std::cout << "|" << **i << "|\t\t" << std::endl;
     }
-    std::cout <<"End of List";
+    std::cout << "End of List";
 
 }
 
 //Find edges incident on a vertex
-void findEdgesMenu(const GraphADT<std::string>& graph){
+void findEdgesMenu(const GraphADT<std::string> &graph) {
     std::string label;
-    std::cout <<"Please provide the label of the of the vertex you are looking for: ";
+    std::cout << "Please provide the label of the of the vertex you are looking for: ";
     std::cin >> label;
 
     //for loop to search for the vertex using an iterator
@@ -51,11 +53,11 @@ void findEdgesMenu(const GraphADT<std::string>& graph){
 }
 
 //Find a path in the graph
-void findPathMenu(GraphADT<std::string> graph){
+void findPathMenu(GraphADT<std::string> graph) {
     std::string label1, label2;
-    std::cout <<"Please provide the label of the first vertex you are looking for";
+    std::cout << "Please provide the label of the first vertex you are looking for";
     std::cin >> label1;
-    std::cout <<"Please provide the label of the second vertex you are looking for";
+    std::cout << "Please provide the label of the second vertex you are looking for";
     std::cin >> label2;
 }
 
@@ -64,11 +66,11 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::string label1, label2, newEdgeString;
 
     //gets user input
-    std::cout <<"Please provide the label of the first vertex you want to add in-between of";
+    std::cout << "Please provide the label of the first vertex you want to add in-between of";
     std::cin >> label1;
-    std::cout <<"Please provide the label of the second vertex you want to add in-between of";
+    std::cout << "Please provide the label of the second vertex you want to add in-between of";
     std::cin >> label2;
-    std::cout <<"Please provide the label of the new edge you want to add";
+    std::cout << "Please provide the label of the new edge you want to add";
     std::cin >> newEdgeString;
     ObjectEdge<std::string> newEdge;
     *newEdge = newEdgeString;
@@ -85,7 +87,7 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
         }
     }
     if (existanceOfVertexAlreadyInGraph) {
-        std::cout <<"Edge insert failed: vertices do not exit" << std::endl;
+        std::cout << "Edge insert failed: vertices do not exit" << std::endl;
         return graph;
     }
 
@@ -94,32 +96,32 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::list<ObjectEdge<std::string>>::iterator j;
     for (j = edges.begin(); j != edges.end(); ++j) {
         if (*(*j) == *newEdge) {
-            std::cout <<"Edge insert failed: edge already exit" << std::endl;
+            std::cout << "Edge insert failed: edge already exit" << std::endl;
             return graph;
         }
     }
 
     //inserts new edge
     graph.insertEdge(label1Vertex, label2Vertex, newEdge);
-    std::cout <<"Edge inserted successfully (hopefully)" << std::endl;
+    std::cout << "Edge inserted successfully (hopefully)" << std::endl;
 
- }
+}
 
 //Erase a vertex
 GraphADT<std::string> ereaseVertexMenu(GraphADT<std::string> graph) {
     std::string vertexToBeRemoved;
-    std::cout <<"Please provide the label of the vertex you want to remove";
+    std::cout << "Please provide the label of the vertex you want to remove";
     std::cin >> vertexToBeRemoved;
     ObjectVertex<std::string> newVertex;
     *newVertex = vertexToBeRemoved;
     graph.eraseVertex(newVertex);
-    std::cout <<"Vertex has been removed" << std::endl;
+    std::cout << "Vertex has been removed" << std::endl;
     return graph;
 }
 
 
 //builds a vector of a based on the file
-std::vector<contents> readFromFile(const std::string& filename) {
+std::vector<contents> readFromFile(const std::string &filename) {
     //creates the vector to store the information
     std::vector<contents> list;
     //buffer to store the input from readfile function
@@ -141,7 +143,7 @@ std::vector<contents> readFromFile(const std::string& filename) {
                 first_time = false;
                 while (std::getline(temp, Contents, ',')) {
                     new_struct.strings.TotalVerticies.push_back(Contents);
-                    std::cout<<new_struct.strings.TotalVerticies.back()<<std::endl;
+                    std::cout << new_struct.strings.TotalVerticies.back() << std::endl;
                 }
                 list.push_back(new_struct);
                 continue;
@@ -153,13 +155,13 @@ std::vector<contents> readFromFile(const std::string& filename) {
                 continue;
             }
             new_struct.strings.listofVertices = (row[0]);
-            std::cout<<std::endl<<new_struct.strings.listofVertices;
+            std::cout << std::endl << new_struct.strings.listofVertices;
 
             new_struct.strings.endOfVertices = (row[1]);
-            std::cout<<" "<<new_struct.strings.endOfVertices<<" ";
+            std::cout << " " << new_struct.strings.endOfVertices << " ";
 
             new_struct.edgeLabel = (row[2]);
-            std::cout<<new_struct.edgeLabel;
+            std::cout << new_struct.edgeLabel;
 
 
 
@@ -172,61 +174,65 @@ std::vector<contents> readFromFile(const std::string& filename) {
     } else {
         std::cout << "Unable to open File! Try again later.\n";
     }
-    std::cout<<std::endl<<std::endl;
+    std::cout << std::endl << std::endl;
     return list;
 }
 
+//removes white spaces before and after the nonwhitespace characters
+std::string removeWhiteSpaceBeforeAndAfter(std::string input) {
+    int firstNonWhitespaceCharacter = input.find_first_not_of(WHITESPACE);
+    int lastNonWhitespaceCharacter = input.find_last_not_of(WHITESPACE);
+    if (firstNonWhitespaceCharacter == std::string::npos) {
+        firstNonWhitespaceCharacter = 0;
+    }
+    if (lastNonWhitespaceCharacter == std::string::npos || input.substr(input.length() - 1) == "s") {
+        lastNonWhitespaceCharacter = input.length();
+    }
+    //std::cout << "firstNonWhitespaceCharacter: " << firstNonWhitespaceCharacter << " lastNonWhite
+    return input.substr(firstNonWhitespaceCharacter, lastNonWhitespaceCharacter);
 
 
-GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
+}
+
+GraphADT<std::string> graphMaker(const std::vector<contents> &contentsList) {
 
 
     GraphADT<std::string> graph;
-    for ( int i =0; i<contentsList.front().strings.TotalVerticies.size(); i++) {
+    for (int i = 0; i < contentsList.front().strings.TotalVerticies.size(); i++) {
 
 
         //std::cout<<contentsList.front().strings.TotalVerticies[i];
-        std::string vertexString = contentsList.front().strings.TotalVerticies[i].substr(0, contentsList.front().strings.TotalVerticies[i].length());
-        //removes first character if first character is a space
 
 
-        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(vertexString);
+
+        ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(
+                removeWhiteSpaceBeforeAndAfter(contentsList.front().strings.TotalVerticies[i]));
         graph.insertVertex(newVertex);
     }
-    for (int i=0;i<contentsList.size();i++){
+    for (int i = 0; i < contentsList.size(); i++) {
         if (!contentsList[i].edgeLabel.empty()) {
-
-
-            //for some reason, if we don't substring it, the program doesn't work, I believe it is because there is another character at the end of the label string which causes issues for the next line, so a substring is used to remove that last character, and the problem went away
-            std::string firstVertexStringCleaned = contentsList[i].strings.listofVertices.substr(0,contentsList[i].strings.listofVertices.length());
-            std::string secondVertexStringCleaned = contentsList[i].strings.endOfVertices.substr(0,contentsList[i].strings.endOfVertices.length());
-            std::string labelStringCleaned = contentsList[i].edgeLabel.substr(0, contentsList[i].edgeLabel.length() - 1);
-
-            //std::cout << firstVertexStringCleaned << " to " << secondVertexStringCleaned << " is " << labelStringCleaned << std::endl;
 
             ObjectVertex<std::string> firstVertex;
             ObjectVertex<std::string> secondVertex;
 
+            //for loop to iterate through the list of vertices to find a match and qual it to the ObjectVertex above
             std::list<ObjectVertex<std::string>>::iterator j;
             std::list<ObjectVertex<std::string>> vertices = graph.vertices();
             for (j = vertices.begin(); j != vertices.end(); ++j) {
-                if (*(*j) == firstVertexStringCleaned) {
+                if (*(*j) == (contentsList[i].strings.endOfVertices)) {
                     firstVertex = *j;
                 }
-                if (*(*j) == secondVertexStringCleaned) {
+                if (*(*j) == (contentsList[i].strings.listofVertices)) {
                     secondVertex = *j;
                 }
             }
 
-            std::cout << *firstVertex << " to " << *secondVertex << " is " << labelStringCleaned << std::endl;
-
-
-            //graph.insertEdge(firstVertex,secondVertex, *new ObjectEdge<std::string>(labelStringCleaned));
+            //inserts edge between the 2 vertices
+            graph.insertEdge(firstVertex, secondVertex,
+                             *new ObjectEdge<std::string>(removeWhiteSpaceBeforeAndAfter(contentsList[i].edgeLabel)));
 
         }
     }
-
-
 
 
     return graph;
