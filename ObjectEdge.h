@@ -10,7 +10,7 @@ template<typename G>
 class ObjectEdge{
 public:
     G value;
-
+    std::list<ObjectVertex<G>> incidentList;
     explicit ObjectEdge(G value) : value(value) {}
 
     ObjectEdge() {}
@@ -18,6 +18,11 @@ public:
 public:
     //returns the element of the label
     G operator*();
+
+    //add Vertex to edge
+    void addVertex(ObjectVertex<G> v) {
+        incidentList.push_back(v);
+    }
 
     //returns the vertex list of the edges ends
     std::list<ObjectVertex<G>> endVertices();
@@ -28,8 +33,9 @@ public:
     //test whether this edge and f are adjacent
     bool isAdjacentTo(ObjectEdge<G> f);
 
-    //test whether e is incident on v
+    //test whether edge is incident on v
     bool IsIncidentOn(ObjectVertex<G> V);
+
     friend class ObjectVertex<G>;
 };
 
@@ -41,13 +47,17 @@ std::list<ObjectVertex<G>> ObjectEdge<G>::endVertices() {
 
 template<typename G>
 bool ObjectEdge<G>::IsIncidentOn(ObjectVertex <G> V) {
-    //TO BE COMPLETED
+    for (auto i = incidentList.begin(); i != incidentList.end(); ++i) {
+        if (*i == V) {
+            return true;
+        } else return false;
+    }
     return false;
 }
 
 template<typename G>
 bool ObjectEdge<G>::isAdjacentTo(ObjectEdge<G> f) {
-    //TO BE COMPLETED
+    for
     return false;
 }
 

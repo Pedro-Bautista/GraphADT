@@ -16,6 +16,12 @@ private:
     std::list<ObjectVertex<G>> verticesList;
     std::list<ObjectEdge<G>> edgesList;
 
+    //get edges
+public:
+    const std::list<ObjectEdge<G>> &getEdgesList() const {
+        return edgesList;
+    }
+
 public:
     //Return a vertex list of all the vertices of the graph.
     std::list<ObjectVertex<G>> vertices() const;
@@ -62,8 +68,11 @@ void GraphADT<G>::eraseVertex(ObjectVertex<G>) {
 
 template<typename G>
 void GraphADT<G>::insertEdge(ObjectVertex<G> v1, ObjectVertex<G> v2, ObjectEdge<G> e) {
-
-
+    e.addVertex(v1);
+    e.addVertex(v2);
+    edgesList.push_back(e);
+    v1.addIncidientEdge(e);
+    v2.addIncidientEdge(e);
     std::cout <<"A edge, with label " << *e << ", has been inserted between " << *v1 << " and " << *v2 <<".\n";
 }
 
