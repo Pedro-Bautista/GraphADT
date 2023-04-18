@@ -192,6 +192,10 @@ GraphADT<std::string> graphMaker(const std::vector<contents>& contentsList) {
         ObjectVertex<std::string> newVertex = *new ObjectVertex<std::string>(contentsList.front().strings.TotalVerticies[i]);
         graph.insertVertex(newVertex);
     }
+    std::cout<<"size is"<<contentsList.size()<<"\n";
+    for (int i=0;i<contentsList.size();i++){
+        std::cout<<contentsList[i].edgeLabel<<std::endl;
+    }
 
 
 
