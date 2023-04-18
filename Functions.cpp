@@ -12,6 +12,55 @@
 
 const std::string WHITESPACE = " \r";
 
+//prints i/o
+void consolePrinting() {
+    GraphADT<std::string> graph;
+    std::vector<contents> list;
+    std::string filename;
+
+    std::cout <<"Hello!\n";
+    std::cout <<"Enter the file name: ";
+    std::cin >> filename;
+
+    //creates graph
+    list = readFromFile(filename);
+    graph = graphMaker(list);
+
+    std::cout <<"Thank you. Your graph is ready";
+
+    int input;
+    do {
+        std::cout <<"\n--------------\nWhat would you like to do?\n--------------\n";
+        std::cout <<"1. Find edges incident on a vertex\n"
+                    "2. Find a path in the graph\n"
+                    "3. Insert an edge\n"
+                    "4. Erase a vertex\n"
+                    "5. Exit\n"
+                    "Input:\t";
+        std::cin >> input;
+        switch (input) {
+            case 1: findEdgesMenu(graph);
+                break;
+            case 2: findPathMenu(graph);
+                break;
+            case 3:
+                graph = insertEdgeMenu(graph);
+                break;
+            case 4:
+                graph = ereaseVertexMenu(graph);
+                break;
+            case 5:
+                return;
+                break;
+            case 6:
+                printVectors(graph);
+                break;
+        }
+    } while (input != 5);
+
+
+}
+
 //prints all vectors
 void printVectors(const GraphADT<std::string> &graph) {
     std::list<ObjectVertex<std::string>> verticesList = graph.vertices();
@@ -40,14 +89,18 @@ void findEdgesMenu(const GraphADT<std::string> &graph) {
     }
     vertex = (*i);
 
-    //creates list of the incident edges for the vertex
-    std::list<ObjectEdge<std::string>> listOfIncidentEdges; // TO BE COMPLETED = vertex.incidentEdges();
+    std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
     std::list<ObjectEdge<std::string>>::iterator j;
+    for (j = edgeList.begin(); j != edgeList.end(); ++j) {
+        std::list<ObjectVertex<std::string>> incidents = j->incidentList;
+        std::list<ObjectVertex<std::string>>::iterator k;
+        if (*k.)
+        for (k = incidents.begin(); k != incidents.end(); ++k ) {
+                std::cout <<"An edge is " << (*k);
+        }
+    }
 
     //prints results
-    for (j = listOfIncidentEdges.begin(); j != listOfIncidentEdges.end(); ++j) {
-        std::cout << *vertex << "to " << *((*j).opposite(vertex)) << "is " << *(*j) << std::endl;
-    }
 
 
 }
@@ -104,7 +157,7 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     //inserts new edge
     graph.insertEdge(label1Vertex, label2Vertex, newEdge);
     std::cout << "Edge inserted successfully (hopefully)" << std::endl;
-
+    return graph;
 }
 
 //Erase a vertex
@@ -143,7 +196,7 @@ std::vector<contents> readFromFile(const std::string &filename) {
                 first_time = false;
                 while (std::getline(temp, Contents, ',')) {
                     new_struct.strings.TotalVerticies.push_back(Contents);
-                    std::cout << new_struct.strings.TotalVerticies.back() << std::endl;
+                    //std::cout << new_struct.strings.TotalVerticies.back() << std::endl;
                 }
                 list.push_back(new_struct);
                 continue;
@@ -155,13 +208,13 @@ std::vector<contents> readFromFile(const std::string &filename) {
                 continue;
             }
             new_struct.strings.listofVertices = (row[0]);
-            std::cout << std::endl << new_struct.strings.listofVertices;
+            //std::cout << std::endl << new_struct.strings.listofVertices;
 
             new_struct.strings.endOfVertices = (row[1]);
-            std::cout << " " << new_struct.strings.endOfVertices << " ";
+            //std::cout << " " << new_struct.strings.endOfVertices << " ";
 
             new_struct.edgeLabel = (row[2]);
-            std::cout << new_struct.edgeLabel;
+            //std::cout << new_struct.edgeLabel;
 
 
 

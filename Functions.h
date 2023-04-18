@@ -18,6 +18,9 @@ struct contents{
     element_struct strings;
 };
 
+//prints i/o
+void consolePrinting();
+
 //removes white spaces before and after the nonwhitespace characters
 std::string removeWhiteSpaceBeforeAndAfter(std::string input);
 
