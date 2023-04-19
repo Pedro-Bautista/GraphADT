@@ -76,7 +76,8 @@ void printVectors(const GraphADT<std::string> &graph) {
 void findEdgesMenu(const GraphADT<std::string> &graph) {
     std::string label;
     std::cout << "Please provide the label of the of the vertex you are looking for: ";
-    std::cin >> label;
+    getline(std::cin, label);
+    std::cout <<"You are looking for |" << label << "|. Coming right up..." << std::endl;
 
     //for loop to search for the vertex using an iterator
     ObjectVertex<std::string> vertex;
@@ -89,18 +90,17 @@ void findEdgesMenu(const GraphADT<std::string> &graph) {
     }
     vertex = (*i);
 
+    //loops edge list to see if vertex is an incident on a given edge, and then prints results
     std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
     std::list<ObjectEdge<std::string>>::iterator j;
     for (j = edgeList.begin(); j != edgeList.end(); ++j) {
         std::list<ObjectVertex<std::string>> incidents = j->incidentList;
         std::list<ObjectVertex<std::string>>::iterator k;
-        if (*k.)
-        for (k = incidents.begin(); k != incidents.end(); ++k ) {
-                std::cout <<"An edge is " << (*k);
+        if ((*j).isAdjacentTo(vertex)) {
+            //std::cout << *vertex << "\t|\t" << **j;
+            std::cout << *(*j->endVertices().begin()) << " is " << **j <<" to " <<  *(*j->endVertices().begin().operator++()) << std::endl;
         }
     }
-
-    //prints results
 
 
 }

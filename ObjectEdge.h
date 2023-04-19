@@ -31,7 +31,7 @@ public:
     ObjectVertex<G> opposite(ObjectVertex<G> V);
 
     //test whether this edge and f are adjacent
-    bool isAdjacentTo(ObjectEdge<G> f);
+    bool isAdjacentTo(ObjectVertex<G> f);
 
     //test whether edge is incident on v
     bool IsIncidentOn(ObjectVertex<G> V);
@@ -41,8 +41,8 @@ public:
 
 template<typename G>
 std::list<ObjectVertex<G>> ObjectEdge<G>::endVertices() {
-    //TO BE COMPLETED
-    return std::list<ObjectVertex<G>>();
+
+    return incidentList;
 }
 
 template<typename G>
@@ -58,8 +58,13 @@ bool ObjectEdge<G>::IsIncidentOn(ObjectVertex <G> V) {
 }
 
 template<typename G>
-bool ObjectEdge<G>::isAdjacentTo(ObjectEdge<G> f) {
-    for
+bool ObjectEdge<G>::isAdjacentTo(ObjectVertex<G> f) {
+    std::list<ObjectVertex<std::string>>::iterator i;
+    for (i = incidentList.begin(); i != incidentList.end(); ++i) {
+        if (**i == *f) {
+            return true;
+        }
+    }
     return false;
 }
 
