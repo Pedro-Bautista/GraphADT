@@ -12,7 +12,7 @@
 
 const std::string WHITESPACE = " \r";
 
-//prints i/o
+//prints user interface
 void consolePrinting() {
     GraphADT<std::string> graph;
     std::vector<contents> list;
@@ -68,7 +68,7 @@ void printVectors(const GraphADT<std::string> &graph) {
     for (std::list<ObjectVertex<std::string>>::iterator i = verticesList.begin(); i != verticesList.end(); ++i) {
         std::cout << "|" << **i << "|\t\t" << std::endl;
     }
-    std::cout << "End of List";
+    std::cout << "End of List" << std::endl;
 
 }
 
@@ -76,7 +76,8 @@ void printVectors(const GraphADT<std::string> &graph) {
 void findEdgesMenu(const GraphADT<std::string> &graph) {
     std::string label;
     std::cout << "Please provide the label of the of the vertex you are looking for: ";
-    std::cin >> label;
+    getline(std::cin, label);
+    std::cout <<"You are looking for |" << label << "|. Coming right up..." << std::endl;
 
     //for loop to search for the vertex using an iterator
     ObjectVertex<std::string> vertex;
@@ -89,18 +90,17 @@ void findEdgesMenu(const GraphADT<std::string> &graph) {
     }
     vertex = (*i);
 
+    //loops edge list to see if vertex is an incident on a given edge, and then prints results
     std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
     std::list<ObjectEdge<std::string>>::iterator j;
     for (j = edgeList.begin(); j != edgeList.end(); ++j) {
         std::list<ObjectVertex<std::string>> incidents = j->incidentList;
         std::list<ObjectVertex<std::string>>::iterator k;
-        if (*k.)
-        for (k = incidents.begin(); k != incidents.end(); ++k ) {
-                std::cout <<"An edge is " << (*k);
+        if ((*j).isAdjacentTo(vertex)) {
+            //std::cout << *vertex << "\t|\t" << **j;
+            std::cout << *(*j->endVertices().begin()) << " is " << **j <<" to " <<  *(*j->endVertices().begin().operator++()) << std::endl;
         }
     }
-
-    //prints results
 
 
 }
@@ -108,10 +108,56 @@ void findEdgesMenu(const GraphADT<std::string> &graph) {
 //Find a path in the graph
 void findPathMenu(GraphADT<std::string> graph) {
     std::string label1, label2;
-    std::cout << "Please provide the label of the first vertex you are looking for";
-    std::cin >> label1;
-    std::cout << "Please provide the label of the second vertex you are looking for";
-    std::cin >> label2;
+    std::cout << "Please provide the label of the first vertex you are looking for\t";
+    getline(std::cin, label1);
+    std::cout << "Please provide the label of the second vertex you are looking for\t";
+    getline(std::cin ,label2);
+    std::cout << "You are looking for a path between |" << label1 <<"| and |" << label2 << "|. Coming right up..." << std::endl;
+
+    //for loop to search for the first vertex using an iterator
+    ObjectVertex<std::string> firstVertex;
+    std::list<ObjectVertex<std::string>> vertices = graph.vertices();
+    std::list<ObjectVertex<std::string>>::iterator i;
+    for (i = vertices.begin(); i != vertices.end(); ++i) {
+        if (*(*i) == label1) {
+            break;
+        }
+    }
+    firstVertex = (*i);
+
+
+    //for loop to search for the second vertex using an iterator
+    ObjectVertex<std::string> secondVertex;
+    for (i = vertices.begin(); i != vertices.end(); ++i) {
+        if (*(*i) == label2) {
+            break;
+        }
+    }
+    secondVertex = (*i);
+
+    //loops edge list to see if vertex is an incident on a given edge, and if that vertex is an incident on the desired vector.
+    std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
+    std::list<ObjectEdge<std::string>>::iterator j;
+    for (j = edgeList.begin(); j != edgeList.end(); ++j) {
+        std::list<ObjectVertex<std::string>> incidents = j->incidentList;
+        std::list<ObjectVertex<std::string>>::iterator k;
+        if ((*j).isAdjacentTo(firstVertex)) {
+            if (*(*j->endVertices().begin()) != *firstVertex) {
+                //std::cout << *(*j->endVertices().begin());
+                graph.isAdjacent(firstVertex,secondVertex);
+                //if ((*j->endVertices().begin()).isAdjacentTo(secondVertex))
+                    std::cout <<"The path is " << *firstVertex << " to " << *(*j->endVertices().begin()) << " to " << *secondVertex << std::endl;
+            }
+            if (*(*j->endVertices().begin().operator++()) != *firstVertex) {
+                //std::cout <<*(*j->endVertices().begin().operator++());
+                //if ((*j->endVertices().begin().operator++()).isAdjacentTo(secondVertex))
+                    std::cout <<"The path is " << *firstVertex << " to " << *(*j->endVertices().begin().operator++()) << " to " << *secondVertex << std::endl;
+            }
+        }
+    }
+
+
+
 }
 
 //Insert an edge
@@ -119,44 +165,75 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
     std::string label1, label2, newEdgeString;
 
     //gets user input
-    std::cout << "Please provide the label of the first vertex you want to add in-between of";
-    std::cin >> label1;
-    std::cout << "Please provide the label of the second vertex you want to add in-between of";
-    std::cin >> label2;
-    std::cout << "Please provide the label of the new edge you want to add";
-    std::cin >> newEdgeString;
-    ObjectEdge<std::string> newEdge;
-    *newEdge = newEdgeString;
-    ObjectVertex<std::string> label1Vertex = *new ObjectVertex<std::string>(label1);
-    ObjectVertex<std::string> label2Vertex = *new ObjectVertex<std::string>(label2);
+    std::cout << "Please provide the label of the first vertex you are looking for\t";
+    getline(std::cin, label1);
+    std::cout << "Please provide the label of the second vertex you are looking for\t";
+    getline(std::cin ,label2);
+    std::cout << "Please provide the label of the new edge you want to add (ex. \"0.27 m\")\t";
+    getline(std::cin ,newEdgeString);
 
-    //checks if vertices are already in the list
-    bool existanceOfVertexAlreadyInGraph;
+    //for loop to search for the label1 vertex using an iterator
+    ObjectVertex<std::string> label1Vertex;
     std::list<ObjectVertex<std::string>> vertices = graph.vertices();
     std::list<ObjectVertex<std::string>>::iterator i;
+    bool label1VertexExist = 0;
     for (i = vertices.begin(); i != vertices.end(); ++i) {
-        if (*(*i) == *label1Vertex || *(*i) == *label2Vertex) {
-            existanceOfVertexAlreadyInGraph = true;
+        if (*(*i) == label1) {
+            label1VertexExist = 1;
+            break;
         }
     }
-    if (existanceOfVertexAlreadyInGraph) {
+    if (label1VertexExist)
+    label1Vertex = (*i);
+
+    //for loop to search for the label2 vertex using an iterator
+    bool label2VertexExist = 0;
+    ObjectVertex<std::string> label2Vertex;
+    for (i = vertices.begin(); i != vertices.end(); ++i) {
+        if (*(*i) == label2) {
+            label2VertexExist = 1;
+            break;
+        }
+    }
+
+    if (label2VertexExist)
+    label2Vertex = (*i);
+
+
+    //checks if vertices are in the list
+    if (!(label1VertexExist && label2VertexExist)) {
         std::cout << "Edge insert failed: vertices do not exit" << std::endl;
         return graph;
     }
 
-    //checks if edge is already in the list
-    std::list<ObjectEdge<std::string>> edges = graph.edges();
+
+    std::cout << *(*label1Vertex.incidentEdges().begin());
+    std::cout << *(*label2Vertex.incidentEdges().begin());
+
+
+    //loops edge list to see if the two vertices already have an edge that the user inputted
+    std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
     std::list<ObjectEdge<std::string>>::iterator j;
-    for (j = edges.begin(); j != edges.end(); ++j) {
-        if (*(*j) == *newEdge) {
-            std::cout << "Edge insert failed: edge already exit" << std::endl;
-            return graph;
+    for (j = edgeList.begin(); j != edgeList.end(); ++j) {
+        std::list<ObjectVertex<std::string>> incidents = j->incidentList;
+        std::list<ObjectVertex<std::string>>::iterator k;
+        if ((*j).isAdjacentTo(label1Vertex)) {
+            if (*(*j->endVertices().begin()) == *label2Vertex || *(*j->endVertices().begin().operator++()) == *label2Vertex) {
+                std::cout << "|" << **j <<"|\n";
+                std::cout << "|" << newEdgeString <<"|\n";
+                if (**j == newEdgeString) {
+                    std::cout << "Edge insertion failed: There is already an edge between these two vertices"
+                              << std::endl;
+                    return graph;
+                }
+            }
         }
     }
-
+    
     //inserts new edge
+    ObjectEdge<std::string> newEdge = *new ObjectEdge<std::string>(newEdgeString);
     graph.insertEdge(label1Vertex, label2Vertex, newEdge);
-    std::cout << "Edge inserted successfully (hopefully)" << std::endl;
+    std::cout << "Edge inserted successfully " << std::endl;
     return graph;
 }
 
@@ -207,11 +284,11 @@ std::vector<contents> readFromFile(const std::string &filename) {
             if (row.empty()) {
                 continue;
             }
-            new_struct.strings.listofVertices = (row[0]);
-            //std::cout << std::endl << new_struct.strings.listofVertices;
+            new_struct.strings.firstVertex = (row[0]);
+            //std::cout << std::endl << new_struct.strings.firstVertex;
 
-            new_struct.strings.endOfVertices = (row[1]);
-            //std::cout << " " << new_struct.strings.endOfVertices << " ";
+            new_struct.strings.secondVertex = (row[1]);
+            //std::cout << " " << new_struct.strings.secondVertex << " ";
 
             new_struct.edgeLabel = (row[2]);
             //std::cout << new_struct.edgeLabel;
@@ -272,10 +349,10 @@ GraphADT<std::string> graphMaker(const std::vector<contents> &contentsList) {
             std::list<ObjectVertex<std::string>>::iterator j;
             std::list<ObjectVertex<std::string>> vertices = graph.vertices();
             for (j = vertices.begin(); j != vertices.end(); ++j) {
-                if (*(*j) == (contentsList[i].strings.endOfVertices)) {
+                if (*(*j) == (contentsList[i].strings.secondVertex)) {
                     firstVertex = *j;
                 }
-                if (*(*j) == (contentsList[i].strings.listofVertices)) {
+                if (*(*j) == (contentsList[i].strings.firstVertex)) {
                     secondVertex = *j;
                 }
             }

@@ -41,11 +41,27 @@ public:
     //Remove edge e
     void eraseEdge(ObjectEdge<G>);
 
+    //sees if vector A and vector B are adjacent
+    bool isAdjacent(ObjectVertex<G> A, ObjectVertex<G> B);
 
     friend ObjectEdge<G>;
     friend ObjectVertex<G>;
 };
 
+template<typename G>
+bool GraphADT<G>::isAdjacent(ObjectVertex<G> A, ObjectVertex<G> B) {
+    std::cout << *A << "tested with " << *B;
+    auto i = edgesList.begin();
+    for (; i != edgesList.end(); ++i) {
+        if (i->isAdjacentTo(A)) {
+            //for (auto j = *i->endVertices().begin(); j != *i->endVertices().end(); ++j)
+            //if ((*j == B)) {
+            //    return true;
+            //}
+        }
+    }
+    return false;
+}
 
 
 template<typename G>

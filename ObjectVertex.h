@@ -37,23 +37,15 @@ public:
     //returns an edge list of edges incident on the vertex
     std::list<ObjectEdge<G>> incidentEdges();
 
-    //test whether the vertex and V are adjacent
-    bool isAdjacentTo(ObjectVertex<G> V);
-
 
 };
 
-template<typename G>
-bool ObjectVertex<G>::isAdjacentTo(ObjectVertex<G> V) {
-    //TO BE COMPLETED
-    return false;
-}
 
-//template<typename G>
-//std::list<ObjectEdge<G>> ObjectVertex<G>::incidentEdges() {
-//    //TO BE FILLED IN
-//    return std::list<ObjectEdge<G>>();
-//}
+template<typename G>
+std::list<ObjectEdge<G>> ObjectVertex<G>::incidentEdges() {
+    //TO BE FILLED IN
+    return std::list<ObjectEdge<G>>();
+}
 
 template<typename G>
 G ObjectVertex<G>::operator*() {
