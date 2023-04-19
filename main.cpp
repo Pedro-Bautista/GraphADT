@@ -10,12 +10,13 @@
 
 
 int main() {
-    consolePrinting();
+    //consolePrinting();
     GraphADT<std::string> graph;
     std::string filename = "input.txt";
     std::vector<contents> list;
     list= readFromFile(filename);
     graph = graphMaker(list);
     printVectors(graph);
+    insertEdgeMenu(graph);
     return EXIT_SUCCESS;
 }

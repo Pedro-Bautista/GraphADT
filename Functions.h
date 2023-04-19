@@ -10,8 +10,8 @@
 
 struct element_struct {
     std::vector<std::string> TotalVerticies;
-    std::string listofVertices;
-    std::string endOfVertices;
+    std::string firstVertex;
+    std::string secondVertex;
 };
 struct contents{
     std::string edgeLabel;
