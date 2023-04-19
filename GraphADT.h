@@ -36,7 +36,7 @@ public:
     void insertEdge(ObjectVertex<G>, ObjectVertex<G>, ObjectEdge<G>);
 
     //Remove vertex and all its incident edges
-    void eraseVertex(ObjectVertex<G>);
+    void eraseVertex(ObjectVertex<G> V);
 
     //Remove edge e
     void eraseEdge(ObjectEdge<G>);
@@ -78,8 +78,29 @@ ObjectVertex<G> GraphADT<G>::insertVertex(ObjectVertex<G> vertex) {
 
 
 template<typename G>
-void GraphADT<G>::eraseVertex(ObjectVertex<G>) {
+void GraphADT<G>::eraseVertex(ObjectVertex<G> V) {
 
+    std::list<std::__1::__list_iterator<ObjectEdge<std::__1::basic_string<char>>, void *>> toBeRemoved;
+    //loops edgeList and stores any iterators that link to edges to be removed in toBeRemoved list
+    for (auto j = edgesList.begin(); j != edgesList.end(); ++j) {
+        if (j->isAdjacentTo(V)) {
+            toBeRemoved.push_back(j);
+        }
+    }
+
+    //ereases edges that need to be removed from the edgeListlist
+    for (auto k = toBeRemoved.begin(); k != toBeRemoved.end(); ++k ) {
+        edgesList.erase(*k);
+    }
+
+
+    //loops verticesList and removes V
+    for (auto i = verticesList.begin(); i != verticesList.end(); ++i) {
+        if (*V == **i) {
+            verticesList.erase(i);
+            break;
+        }
+    }
 }
 
 template<typename G>

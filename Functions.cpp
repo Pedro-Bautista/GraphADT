@@ -239,13 +239,32 @@ GraphADT<std::string> insertEdgeMenu(GraphADT<std::string> graph) {
 
 //Erase a vertex
 GraphADT<std::string> ereaseVertexMenu(GraphADT<std::string> graph) {
-    std::string vertexToBeRemoved;
-    std::cout << "Please provide the label of the vertex you want to remove";
-    std::cin >> vertexToBeRemoved;
-    ObjectVertex<std::string> newVertex;
-    *newVertex = vertexToBeRemoved;
-    graph.eraseVertex(newVertex);
-    std::cout << "Vertex has been removed" << std::endl;
+    std::string vertexToBeRemovedString;
+    std::cout << "Please provide the label of the vertex you want to remove\t";
+    getline(std::cin, vertexToBeRemovedString);
+
+
+    //for loop to search for the vertex using an iterator
+    bool doesVertexExist = 0;
+    ObjectVertex<std::string> vertex;
+    std::list<ObjectVertex<std::string>> vertices = graph.vertices();
+    std::list<ObjectVertex<std::string>>::iterator i;
+    for (i = vertices.begin(); i != vertices.end(); ++i) {
+        if (*(*i) == vertexToBeRemovedString) {
+            doesVertexExist = 1;
+            break;
+        }
+    }
+
+    if (doesVertexExist == 0) {
+        std::cout <<"There is not a vertex with that label in this graph" << std::endl;
+        return graph;
+    }
+    vertex = (*i);
+
+    graph.eraseVertex(vertex);
+    std::cout << "Vertex has been removed, as well as any edges that point to it" << std::endl;
+    printVectors(graph);
     return graph;
 }
 

@@ -17,6 +17,6 @@ int main() {
     list= readFromFile(filename);
     graph = graphMaker(list);
     printVectors(graph);
-    insertEdgeMenu(graph);
+    ereaseVertexMenu(graph);
     return EXIT_SUCCESS;
 }
