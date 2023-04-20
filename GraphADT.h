@@ -1,5 +1,5 @@
 //
-// Created by moren on 4/11/2023.
+// Created by Kenneth Verzyl and Pedro Bautista on 4/11/2023.
 //
 
 #ifndef GRAPHADT_GRAPHADT_H
@@ -38,9 +38,6 @@ public:
     //Remove vertex and all its incident edges
     void eraseVertex(ObjectVertex<G> V);
 
-    //Remove edge e
-    void eraseEdge(ObjectEdge<G>);
-
     //sees if vector A and vector B are adjacent
     bool isAdjacent(ObjectVertex<G> A, ObjectVertex<G> B);
 
@@ -50,29 +47,30 @@ public:
 
 template<typename G>
 bool GraphADT<G>::isAdjacent(ObjectVertex<G> A, ObjectVertex<G> B) {
-    std::cout << *A << "tested with " << *B;
-    auto i = edgesList.begin();
+    //std::cout << "\n" << *A << " tested with " << *B << std::endl;
+    std::__1::__list_iterator<ObjectEdge<std::__1::basic_string<char>>, void *> i = edgesList.begin();
     for (; i != edgesList.end(); ++i) {
         if (i->isAdjacentTo(A)) {
-            //for (auto j = *i->endVertices().begin(); j != *i->endVertices().end(); ++j)
-            //if ((*j == B)) {
-            //    return true;
-            //}
+            //std::cout << *(*i->incidentList.begin());
+            std::__1::list<ObjectVertex<std::__1::basic_string<char>>> list2 = i.operator*().incidentList;
+            std::__1::list<ObjectVertex<std::__1::basic_string<char>>>::iterator k;
+            for (k = list2.begin(); k != list2.end(); ++k) {
+                if (*B == **k) {
+                    //std::cout << *A << " == " << *B << std::endl;
+                    return true;
+                }
+            }
         }
     }
     return false;
 }
 
 
-template<typename G>
-void GraphADT<G>::eraseEdge(ObjectEdge<G>) {
-
-}
 
 template<typename G>
 ObjectVertex<G> GraphADT<G>::insertVertex(ObjectVertex<G> vertex) {
     verticesList.push_back(vertex);
-    std::cout << "A vertex, "<< *vertex <<" , has been inserted into the graph, with no edges" << std::endl;
+    //std::cout << "A vertex, "<< *vertex <<" , has been inserted into the graph, with no edges" << std::endl;
     return vertex;
 }
 
@@ -88,7 +86,7 @@ void GraphADT<G>::eraseVertex(ObjectVertex<G> V) {
         }
     }
 
-    //ereases edges that need to be removed from the edgeListlist
+    //erases edges that need to be removed from the edgeListlist
     for (auto k = toBeRemoved.begin(); k != toBeRemoved.end(); ++k ) {
         edgesList.erase(*k);
     }
@@ -110,7 +108,7 @@ void GraphADT<G>::insertEdge(ObjectVertex<G> v1, ObjectVertex<G> v2, ObjectEdge<
     edgesList.push_back(e);
     v1.addIncidientEdge(e);
     v2.addIncidientEdge(e);
-    std::cout <<"A edge, with label " << *e << ", has been inserted between " << *v1 << " and " << *v2 <<".\n";
+    //std::cout <<"A edge, with label " << *e << ", has been inserted between " << *v1 << " and " << *v2 <<".\n";
 }
 
 template<typename G>

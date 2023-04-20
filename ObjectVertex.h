@@ -34,18 +34,10 @@ public:
     //returns the element of the vertex
     G operator*();
 
-    //returns an edge list of edges incident on the vertex
-    std::list<ObjectEdge<G>> incidentEdges();
-
 
 };
 
 
-template<typename G>
-std::list<ObjectEdge<G>> ObjectVertex<G>::incidentEdges() {
-    //TO BE FILLED IN
-    return std::list<ObjectEdge<G>>();
-}
 
 template<typename G>
 G ObjectVertex<G>::operator*() {

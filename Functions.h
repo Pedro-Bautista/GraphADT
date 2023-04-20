@@ -1,5 +1,5 @@
 //
-// Created by moren on 4/10/2023.
+// Created by Kenneth Verzyl and Pedro Bautista on 4/10/2023.
 //
 
 #ifndef GRAPHADT_FUNCTIONS_H
@@ -17,6 +17,9 @@ struct contents{
     std::string edgeLabel;
     element_struct strings;
 };
+
+//prints ascii globe art
+void printGlobe ();
 
 //prints i/o
 void consolePrinting();

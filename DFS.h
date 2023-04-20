@@ -1,5 +1,5 @@
 //
-// Created by moren on 4/11/2023.
+// Created by Kenneth Verzyl and Pedro Bautista on 4/11/2023.
 //
 
 #ifndef GRAPHADT_DFS_H
