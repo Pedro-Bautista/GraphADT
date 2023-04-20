@@ -11,6 +11,8 @@ class ObjectEdge{
 public:
     G value;
     std::list<ObjectVertex<G>> incidentList;
+
+    //constructors
     explicit ObjectEdge(G value) : value(value) {}
 
     ObjectEdge() {}
@@ -26,9 +28,6 @@ public:
 
     //returns the vertex list of the edges ends
     std::list<ObjectVertex<G>> endVertices();
-
-    //returns the end vertex of the edge distinct from V
-    ObjectVertex<G> opposite(ObjectVertex<G> V);
 
     //test whether this edge and f are adjacent
     bool isAdjacentTo(ObjectVertex<G> f);
@@ -68,11 +67,7 @@ bool ObjectEdge<G>::isAdjacentTo(ObjectVertex<G> f) {
     return false;
 }
 
-template<typename G>
-ObjectVertex<G> ObjectEdge<G>::opposite(ObjectVertex<G> V) {
-    //TO BE COMPLETED
-    return ObjectVertex<G>();
-}
+
 
 template<typename G>
 G ObjectEdge<G>::operator*() {

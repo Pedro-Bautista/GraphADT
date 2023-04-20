@@ -1,5 +1,5 @@
 //
-// Created by moren on 4/10/2023.
+// Created by Kenneth Verzyl and Pedro Bautista on 4/10/2023.
 //
 
 #include <iostream>
@@ -10,13 +10,11 @@
 
 
 int main() {
-    //consolePrinting();
+    consolePrinting();
     GraphADT<std::string> graph;
     std::string filename = "input.txt";
     std::vector<contents> list;
     list= readFromFile(filename);
     graph = graphMaker(list);
-    printVectors(graph);
-    ereaseVertexMenu(graph);
     return EXIT_SUCCESS;
 }
