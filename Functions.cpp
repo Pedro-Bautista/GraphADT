@@ -132,12 +132,20 @@ void findEdgesMenu(const GraphADT<std::string> &graph) {
     ObjectVertex<std::string> vertex;
     std::list<ObjectVertex<std::string>> vertices = graph.vertices();
     std::list<ObjectVertex<std::string>>::iterator i;
+    bool doesVertexExist = 0;
     for (i = vertices.begin(); i != vertices.end(); ++i) {
         if (*(*i) == label) {
+            doesVertexExist = 1;
             break;
         }
     }
-    vertex = (*i);
+
+    if (doesVertexExist) {
+        vertex = (*i);
+    }
+    else {
+        std::cout <<"This vector could not be found." << std::endl;
+    }
 
     //loops edge list to see if vertex is an incident on a given edge, and then prints results
     std::list<ObjectEdge<std::string>> edgeList = graph.getEdgesList();
