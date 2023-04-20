@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <algorithm>
+#include <limits>
 
 const std::string WHITESPACE = " \r";
 
