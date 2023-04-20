@@ -48,12 +48,12 @@ public:
 template<typename G>
 bool GraphADT<G>::isAdjacent(ObjectVertex<G> A, ObjectVertex<G> B) {
     //std::cout << "\n" << *A << " tested with " << *B << std::endl;
-    std::list<ObjectEdge<std::basic_string<char>>>::iterator i = edgesList.begin();
+    std::__1::__list_iterator<ObjectEdge<std::__1::basic_string<char>>, void *> i = edgesList.begin();
     for (; i != edgesList.end(); ++i) {
         if (i->isAdjacentTo(A)) {
             //std::cout << *(*i->incidentList.begin());
-            std::list<ObjectVertex<std::basic_string<char>>> list2 = i.operator*().incidentList;
-            std::list<ObjectVertex<std::basic_string<char>>>::iterator k;
+            std::__1::list<ObjectVertex<std::__1::basic_string<char>>> list2 = i.operator*().incidentList;
+            std::__1::list<ObjectVertex<std::__1::basic_string<char>>>::iterator k;
             for (k = list2.begin(); k != list2.end(); ++k) {
                 if (*B == **k) {
                     //std::cout << *A << " == " << *B << std::endl;
@@ -78,7 +78,7 @@ ObjectVertex<G> GraphADT<G>::insertVertex(ObjectVertex<G> vertex) {
 template<typename G>
 void GraphADT<G>::eraseVertex(ObjectVertex<G> V) {
 
-    std::list<std::list<ObjectEdge<std::basic_string<char>>>::iterator> toBeRemoved;
+    std::list<std::__1::__list_iterator<ObjectEdge<std::__1::basic_string<char>>, void *>> toBeRemoved;
     //loops edgeList and stores any iterators that link to edges to be removed in toBeRemoved list
     for (auto j = edgesList.begin(); j != edgesList.end(); ++j) {
         if (j->isAdjacentTo(V)) {
